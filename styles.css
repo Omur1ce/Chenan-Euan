@@ -1,0 +1,30 @@
+/* Shared navigation bar styling */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(51, 51, 51, 0.9);
+    padding: 10px;
+    display: flex;
+    gap: 20px;
+    z-index: 1000;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Add padding so content isn't hidden behind nav */
+body {
+    padding-top: 50px;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
