@@ -9,7 +9,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: url('https://i.pinimg.com/736x/5b/d1/70/5bd170bb4655992be36d6034b35224fd.jpg') no-repeat center center fixed;
+            background: url('images/6back.jpg') no-repeat center center fixed;
             background-size: cover;
             color: white;
             font-family: Arial, sans-serif;
@@ -24,27 +24,28 @@
         .content {
             max-width: 1200px;
             padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 images per row */
             gap: 20px;
+            justify-items: center;
             text-align: center;
         }
 
         .content h1 {
-            width: 100%;
+            grid-column: 1 / -1; /* spans the entire grid */
             margin-bottom: 30px;
             font-size: 48px;
             text-shadow: 3px 3px 6px #000;
         }
 
         .content img {
-            width: 250px;       /* uniform width */
-            height: 250px;      /* uniform height */
+            width: 300px;       /* uniform width */
+            height: 300px;      /* uniform height */
             object-fit: cover;  /* crops to fit if original sizes differ */
             border-radius: 15px;
             box-shadow: 3px 3px 10px #000;
             transition: transform 0.2s;
+            cursor: pointer;
         }
 
         .content img:hover {
@@ -62,6 +63,42 @@
             border-radius: 10px;
             outline: none;
         }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close:hover {
+            color: #bbb;
+        }
     </style>
 </head>
 <body>
@@ -71,10 +108,6 @@
         <a href="6months.html">6 Months</a>
     </nav>
 
-    <div class="content">
-        <h1>6 Months Memories</h1>
-    </div>
-
     <div class="audio-container">
         <audio controls autoplay loop>
             <source src="song.mp3" type="audio/mpeg">
@@ -82,23 +115,67 @@
         </audio>
     </div>
 
-    <script>
+    <div class="content">
+        <h1>6 Months Memories</h1>
+    </div>
 
+
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+    </div>
+
+    <script>
         const images = [
-            "images/image1.jpg",
+            "images/image22.jpg",
+            "images/image21.jpg",
             "images/image2.jpg",
+            "images/image1.jpg",
             "images/image3.jpg",
+            "images/image5.jpg",
+            "images/image18.jpg",
+            "images/image6.jpg",
+            "images/image12.jpg",
+            "images/image7.jpg",
+            "images/image9.jpg",
+            "images/image10.jpg",
+            "images/image11.jpg",
+            "images/image8.jpg",
+            "images/image13.jpg",
+            "images/image14.jpg",
+            "images/image15.jpg",
+            "images/image16.jpg",
+            "images/image17.jpg",
             "images/image4.jpg",
-            "images/image5.jpg"
+            "images/image19.jpg",
+            "images/image20.jpg"
         ];
 
         const gallery = document.querySelector('.content');
+        const modal = document.getElementById("modal");
+        const modalImg = document.getElementById("modal-img");
+        const closeBtn = document.getElementsByClassName("close")[0];
 
         images.forEach(src => {
             const img = document.createElement('img');
             img.src = src;
             gallery.appendChild(img);
+
+            img.addEventListener('click', () => {
+                modal.style.display = "block";
+                modalImg.src = src; // show full image
+            });
         });
+
+        // Close modal
+        closeBtn.onclick = () => modal.style.display = "none";
+
+        // Click outside image to close
+        modal.onclick = (e) => {
+            if(e.target === modal) modal.style.display = "none";
+        };
     </script>
 </body>
 </html>
