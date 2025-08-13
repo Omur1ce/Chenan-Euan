@@ -6,38 +6,41 @@
     <link rel="stylesheet" href="styles.css"> <!-- Shared nav bar styles -->
     <style>
         body {
-            background-image: url('https://static.wikia.nocookie.net/battle-cats/images/b/be/Bg015.png/revision/latest?cb=20160217191838');
+            background-image: url('bh015.png'); /* local PNG file */
             background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
+
         nav {
-        width: 100%;
-        padding: 10px 0;
-        display: flex;
-        justify-content: center; /* centers the links horizontally */
-        gap: 30px;               /* spacing between links */
-        background: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
-        position: fixed;         /* stick to top */
-        top: 0;
-        z-index: 1000;           /* ensures it stays above content */
-    }
+            width: 100%;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center; /* centers the links horizontally */
+            gap: 30px;               /* spacing between links */
+            background: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
+            position: fixed;         /* stick to top */
+            top: 0;
+            z-index: 1000;           /* ensures it stays above content */
+        }
 
-    nav a {
-        color: white;
-        text-decoration: none;
-        font-size: 18px;
-        font-weight: bold;
-        transition: 0.2s;
-    }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
 
-    nav a:hover {
-        text-decoration: underline;
-        color: #FFD700; /* optional: adds a hover color */
-    }
+        nav a:hover {
+            text-decoration: underline;
+            color: #FFD700; /* optional: adds a hover color */
+        }
 
-    body {
-        margin: 0;  /* ensures full-width content */
-        font-family: Arial, sans-serif;
-    }
+        body {
+            margin: 0;  /* ensures full-width content */
+            font-family: Arial, sans-serif;
+        }
     </style>
 </head>
 
