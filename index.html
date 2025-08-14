@@ -2,55 +2,280 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home - Chenan and Euan</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Optional shared nav bar styles -->
+    <title>Favorite Pokémon Showcase</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Shared nav bar styles -->
     <style>
+      .newline-div {
+        height: 60px; /* Adjust height for desired blank line space */
+        margin-bottom: 10px; /* Add extra spacing if needed */
+      }
+
         body {
-            background: url('homeback.jpg') no-repeat center center fixed;
+            background: url('https://i.pinimg.com/736x/5b/d1/70/5bd170bb4655992be36d6034b35224fd.jpg') no-repeat center center fixed;
             background-size: cover;
-            margin: 0;
-            font-family: Arial, sans-serif;
+            color: white;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        .container {
+            display: flex;
+            gap: 50px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px 40px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 24px;
+            border: none;
+            border-radius: 8px;
+            background-color: #007BFF;
             color: white;
-            text-shadow: 2px 2px 4px #000;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px #000;
+            transition: transform 0.1s;
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        img {
+            max-height: 100px;
+            object-fit: contain;
         }
         nav {
-            width: 100%;
-            padding: 10px 0;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            background: rgba(0, 0, 0, 0.5);
-            position: fixed;
-            top: 0;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        h1 {
-            font-size: 60px;
-            text-align: center;
-        }
+        width: 100%;
+        padding: 10px 0;
+        display: flex;
+        justify-content: center; /* centers the links horizontally */
+        gap: 30px;               /* spacing between links */
+        background: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
+        position: fixed;         /* stick to top */
+        top: 0;
+        z-index: 1000;           /* ensures it stays above content */
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+        color: #FFD700; /* optional: adds a hover color */
+    }
+
+    body {
+        margin: 0;  /* ensures full-width content */
+        font-family: Arial, sans-serif;
+    }
     </style>
 </head>
 <body>
     <nav>
+        
         <a href="index.html">Home</a>
         <a href="pokemon.html">Our Pokémon</a>
         <a href="battlecats.html">Our Battle Cats</a>
         <a href="6months.html">6 Months</a>
     </nav>
 
-    <h1>Chenan and Euan</h1>
+    <h1 style="font-size: 48px; margin-bottom: 30px; text-shadow: 3px 3px 6px #000;">Euan and Chenan's Favourites!</h1>
+
+    <div class="container" id="content"></div>
+
+    <div class="buttons">
+        <button onclick="prev()">&lt;</button>
+        <button onclick="next()">&gt;</button>
+    </div>
+
+    <script>
+        const topics = [
+        {
+                title1: "My girlfriend",
+                link1: "",
+                img1: "https://play.pokemonshowdown.com/sprites/trainers/lusamine-nihilego.png",
+                alt1: "Lusamine Nihilego",
+
+                title2: "Me",
+                link2: "",
+                img2: "https://play.pokemonshowdown.com/sprites/trainers/hexmaniac-gen3.png",
+                alt2: "Hex Maniac Gen 3"
+            },
+            {
+                title1: "My girlfriend's favourite Starter",
+                link1: "https://pokemondb.net/pokedex/sobble",
+                img1: "https://img.pokemondb.net/sprites/home/normal/sobble.png",
+                alt1: "Sobble",
+
+                title2: "My favourite Starter",
+                link2: "https://pokemondb.net/pokedex/bulbasaur",
+                img2: "https://img.pokemondb.net/sprites/black-white/anim/normal/bulbasaur.gif",
+                alt2: "Bulbasaur"
+            },
+            {
+                title1: "My girlfriend's favourite Shiny",
+                link1: "https://pokemondb.net/pokedex/zoroark",
+                img1: "https://img.pokemondb.net/sprites/home/shiny/zoroark-hisuian.png",
+                alt1: "Zoroark",
+
+                title2: "My favourite Shiny",
+                link2: "https://pokemondb.net/pokedex/zygarde",
+                img2: "https://img.pokemondb.net/sprites/x-y/shiny/zygarde.png",
+                alt2: "Zygarde"
+            },
+            {
+                title1: "My girlfriend's favourite Mega",
+                link1: "https://pokemondb.net/pokedex/mewtwo",
+                img1: "https://img.pokemondb.net/sprites/omega-ruby-alpha-sapphire/dex/normal/mewtwo-mega-y.png",
+                alt1: "Mewtwo",
+
+                title2: "My favourite Mega",
+                link2: "https://pokemondb.net/pokedex/altaria",
+                img2: "https://img.pokemondb.net/sprites/home/normal/altaria-mega.png",
+                alt2: "Altaria"
+            },
+            {
+                title1: "My girlfriend's favourite Eeveelution",
+                link1: "https://pokemondb.net/pokedex/umbreon",
+                img1: "https://img.pokemondb.net/sprites/black-white/normal/umbreon.png",
+                alt1: "Umbreon",
+
+                title2: "My favourite Eeveelution",
+                link2: "https://pokemondb.net/pokedex/espeon",
+                img2: "https://img.pokemondb.net/sprites/black-white/normal/espeon.png",
+                alt2: "Espeon"
+            },
+            {
+                title1: "My girlfriend's favourite Mythical",
+                link1: "https://pokemondb.net/pokedex/victini",
+                img1: "https://img.pokemondb.net/sprites/black-white/normal/victini.png",
+                alt1: "Victini",
+
+                title2: "My favourite Mythical",
+                link2: "https://pokemondb.net/pokedex/shaymin",
+                img2: "https://img.pokemondb.net/sprites/black-white/normal/shaymin-land.png",
+                alt2: "Shaymin"
+            },
+            {
+                title1: "My girlfriend's favourite Pseudo-Legendary",
+                link1: "https://pokemondb.net/pokedex/dreepy",
+                img1: "https://img.pokemondb.net/sprites/sword-shield/normal/dreepy.png",
+                alt1: "Dreepy",
+
+                title2: "My favourite Pseudo-Legendary",
+                link2: "https://pokemondb.net/pokedex/goomy",
+                img2: "https://img.pokemondb.net/sprites/x-y/normal/goomy.png",
+                alt2: "Goomy"
+            },
+            {
+                title1: "My girlfriend's favourite Paradox",
+                link1: "https://pokemondb.net/pokedex/roaring-moon",
+                img1: "https://img.pokemondb.net/sprites/scarlet-violet/normal/roaring-moon.png",
+                alt1: "Roaring Moon",
+
+                title2: "My favourite Paradox",
+                link2: "https://pokemondb.net/pokedex/raging-bolt",
+                img2: "https://img.pokemondb.net/sprites/home/normal/raging-bolt.png",
+                alt2: "Raging Bolt"
+            },
+            {
+                title1: "My girlfriend's favourite Ultra Beast",
+                link1: "https://pokemondb.net/pokedex/nihilego",
+                img1: "https://img.pokemondb.net/sprites/ultra-sun-ultra-moon/normal/nihilego.png",
+                alt1: "Nihilego",
+
+                title2: "My favourite Ultra Beast",
+                link2: "https://pokemondb.net/pokedex/kartana",
+                img2: "https://img.pokemondb.net/sprites/sun-moon/normal/kartana.png",
+                alt2: "Kartana"
+            },
+            {
+                title1: "My girlfriend's favourite Gigantamax",
+                link1: "https://pokemondb.net/pokedex/inteleon",
+                img1: "https://img.pokemondb.net/sprites/home/normal/inteleon-gigantamax.png",
+                alt1: "Inteleon",
+
+                title2: "My favourite Gigantamax",
+                link2: "https://pokemondb.net/pokedex/snorlax",
+                img2: "https://img.pokemondb.net/sprites/home/normal/snorlax-gigantamax.png",
+                alt2: "Snorlax"
+            },
+            {
+                title2: "My favourite Legendary",
+                link2: "https://pokemondb.net/pokedex/zekrom",
+                img2: "https://img.pokemondb.net/sprites/black-white/anim/normal/zekrom.gif",
+                alt2: "Zekrom",
+
+                title1: "My girlfriend's favourite legendary",
+                link1: "https://pokemondb.net/pokedex/rayquaza",
+                img1: "https://img.pokemondb.net/sprites/black-white/anim/normal/rayquaza.gif",
+                alt1: "Rayquaza"
+            },
+            {
+                title2: "My favourite Pokémon",
+                link2: "https://pokemondb.net/pokedex/mew",
+                img2: "https://img.pokemondb.net/sprites/black-white/anim/normal/mew.gif",
+                alt2: "Mew",
+
+                title1: "My girlfriend's favourite Pokémon",
+                link1: "https://pokemondb.net/pokedex/rowlet",
+                img1: "https://img.pokemondb.net/sprites/legends-arceus/normal/rowlet.png",
+                alt1: "Rowlet"
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function render() {
+            const topic = topics[currentIndex];
+            document.getElementById("content").innerHTML = `
+                <div>
+                    <p>${topic.title1}</p>
+                    <a href="${topic.link1}" target="_blank">
+                        <img src="${topic.img1}" alt="${topic.alt1}">
+                    </a>
+                </div>
+                <div>
+                    <p>${topic.title2}</p>
+                    <a href="${topic.link2}" target="_blank">
+                        <img src="${topic.img2}" alt="${topic.alt2}">
+                    </a>
+                </div>
+            `;
+        }
+
+        function next() {
+            currentIndex = (currentIndex + 1) % topics.length;
+            render();
+        }
+
+        function prev() {
+            currentIndex = (currentIndex - 1 + topics.length) % topics.length;
+            render();
+        }
+
+        render();
+        
+    </script>
+    <div class="newline-div"></div>
+    <div class="audio-container">
+        <audio controls autoplay loop>
+            <source src="pokemonsong.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
 </body>
 </html>
