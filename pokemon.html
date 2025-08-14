@@ -5,6 +5,11 @@
     <title>Favorite Pokémon Showcase</title>
     <link rel="stylesheet" href="styles.css"> <!-- Shared nav bar styles -->
     <style>
+      .newline-div {
+        height: 60px; /* Adjust height for desired blank line space */
+        margin-bottom: 10px; /* Add extra spacing if needed */
+      }
+
         body {
             background: url('https://i.pinimg.com/736x/5b/d1/70/5bd170bb4655992be36d6034b35224fd.jpg') no-repeat center center fixed;
             background-size: cover;
@@ -263,6 +268,14 @@
         }
 
         render();
+        
     </script>
+    <div class="newline-div"></div>
+    <div class="audio-container">
+        <audio controls autoplay loop>
+            <source src="pokemonsong.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
 </body>
 </html>
